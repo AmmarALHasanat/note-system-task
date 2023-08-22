@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa322c53454393ed775cfe4807d54a50",
+    "content-hash": "a7850379192fc8945d6686ac459dc1aa",
     "packages": [
         {
             "name": "brick/math",
@@ -3093,6 +3093,117 @@
                 }
             ],
             "time": "2023-04-15T23:01:58+00:00"
+        },
+        {
+            "name": "shamaseen/laravel-files-generator",
+            "version": "0.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mshamaseen/laravel-files-generator.git",
+                "reference": "959998574bc77b902263e6df31855ab3bffa2331"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mshamaseen/laravel-files-generator/zipball/959998574bc77b902263e6df31855ab3bffa2331",
+                "reference": "959998574bc77b902263e6df31855ab3bffa2331",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">6",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.8",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Shamaseen\\Generator\\GeneratorServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Shamaseen\\Generator\\": "src/",
+                    "Shamaseen\\Generator\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "shamaseen",
+                    "email": "m.shamaseen@outlook.com"
+                }
+            ],
+            "description": "Generate any kind of File/s from stubs with only a single command, literally, ANY TYPE.",
+            "support": {
+                "issues": "https://github.com/mshamaseen/laravel-files-generator/issues",
+                "source": "https://github.com/mshamaseen/laravel-files-generator/tree/0.5.2"
+            },
+            "time": "2022-06-26T01:05:50+00:00"
+        },
+        {
+            "name": "shamaseen/laravel-repositories",
+            "version": "2.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mshamaseen/laravel-repositories.git",
+                "reference": "b7c40fb8259949ccbc45b833d258dcda197f3539"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mshamaseen/laravel-repositories/zipball/b7c40fb8259949ccbc45b833d258dcda197f3539",
+                "reference": "b7c40fb8259949ccbc45b833d258dcda197f3539",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">5.7",
+                "php": "^8",
+                "shamaseen/laravel-files-generator": "^0.5"
+            },
+            "require-dev": {
+                "doctrine/dbal": ">2.8",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Shamaseen\\Repository\\RepositoryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "App\\": "tests/results/app/",
+                    "Shamaseen\\Repository\\": "src/",
+                    "Shamaseen\\Repository\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohammad Shamaseen",
+                    "email": "m.shamaseen@outlook.com"
+                }
+            ],
+            "description": "repository pattern files generator",
+            "support": {
+                "issues": "https://github.com/mshamaseen/laravel-repositories/issues",
+                "source": "https://github.com/mshamaseen/laravel-repositories/tree/2.1.7"
+            },
+            "time": "2023-07-21T21:36:19+00:00"
         },
         {
             "name": "symfony/console",
