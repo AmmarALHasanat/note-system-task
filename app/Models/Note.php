@@ -2,15 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Shamaseen\Repository\Utility\Model as Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+
+/**
+ * Class Note.
+ */
 class Note extends Model
 {
+    /*
+    * Fill in your fillables here
+    */
     use HasFactory;
-    protected $guarded = [];
 
+    protected $fillable = [];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
