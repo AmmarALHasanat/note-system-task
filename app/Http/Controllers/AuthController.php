@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\UserAuthenticationResource;
 
 
 class AuthController extends Controller
@@ -44,7 +45,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'data' => new UserAuthenticationResource($user),
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -83,7 +84,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'data' => new UserAuthenticationResource($user)
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
