@@ -26,7 +26,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class,'logout']);
         Route::prefix('/notes')->group(function () {
             Route::get('/', [NoteController::class, 'indexApi']);
+            Route::post('/create', [NoteController::class, 'createApi']);
             Route::get('/{id}', [NoteController::class, 'showApi']);
+            Route::put('/{id}/edit', [NoteController::class, 'updateApi']);
+            Route::delete('/{id}/delete', [NoteController::class, 'destroyApi']);
         });
     });
 });

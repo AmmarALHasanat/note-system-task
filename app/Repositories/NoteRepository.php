@@ -2,10 +2,8 @@
 namespace App\Repositories;
 
 use App\Models\Note;
-use App\Http\Requests\NoteRequest;
 use App\Http\Resources\NoteResource;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\NoteCollection;
+use App\Models\User;
 use Shamaseen\Repository\Utility\AbstractRepository as AbstractRepository;
 /**
  * Class NoteRepository.
@@ -14,7 +12,8 @@ use Shamaseen\Repository\Utility\AbstractRepository as AbstractRepository;
  */
 class NoteRepository extends AbstractRepository
 {
-    public array $with = [];
+    // if you use ORM 
+    public array $with = ['user'];
 
     /**
      * @return string
@@ -24,34 +23,27 @@ class NoteRepository extends AbstractRepository
         return Note::class;
     }
 
-    public function all(){
+    public function getNotesToUser(User $user){
         try {
-            $user = Auth::user();
-            $notes = $user->notes()->get();
+            $notes = $user->notes()->get(); // use Lazy Loading
+            // $notes = User::with('notes')->find($user->id); // use Eager Loading
         } catch (\Exception $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),
                 'success' => false
             ], 400);
         }
-        return NoteCollection::make($notes);
+        return $notes;
     }
     public function show(string $id){
-        try{
-            $user= Auth::user();
-            // $note= Note::whereId($id);
+        try {
             $note = Note::findorFail($id);
-            if(!$user->can('view', $note)){
-                throw new \Exception("You don't have permission to view this note",512 );
-            }
-            
-        }
-        catch(\Exception $exception ){
+        } catch (\Exception $exception) {
             return response()->json([
                 'message' => $exception->getMessage(),
                 'success' => false
             ], 400);
         }
-        return NoteResource::make($note);
+        return $note;
     }
 }

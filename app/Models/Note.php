@@ -17,7 +17,7 @@ class Note extends Model
     */
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['title', 'discrption', 'user_id'];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

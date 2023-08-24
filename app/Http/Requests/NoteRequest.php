@@ -15,7 +15,7 @@ class NoteRequest extends Request
      * @var array
      */
     protected array $rules = [
-
+        'title' => ['string',],
     ];
 
     // Write your methods using {Controller Method Name}Rules, or {HTTP Method}MethodRules syntax.
