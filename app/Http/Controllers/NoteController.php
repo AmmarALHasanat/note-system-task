@@ -100,7 +100,7 @@ class NoteController extends Controller
             if (!$user->can('update', $note)) {
                 throw new \Exception("You don't have permission to view this note", 512);
             }
-            if (empty($this->request['title']) && empty($this->request['discrption'])) {
+            if (empty($this->request['title']) || empty($this->request['discrption'])) {
                 throw new \Exception("Both title and discrption are required.", 400);
             }
             $this->update($id);
@@ -137,4 +137,5 @@ class NoteController extends Controller
             'success' => true,
         ], 200);
     }
+
 }
