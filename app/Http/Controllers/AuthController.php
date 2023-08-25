@@ -30,14 +30,14 @@ class AuthController extends Controller
                     'status' => false,
                     'message' => 'validation error',
                     'errors' => $validateUser->errors()
-                ], 401);
+                ], 422);
             }
 
             if (!Auth::attempt($request->only(['email', 'password']))) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
-                ], 401);
+                ], 422);
             }
 
             $user = User::where('email', $request->email)->first();
@@ -54,7 +54,7 @@ class AuthController extends Controller
             ], 500);
         }
     }
-    
+
     public function register(Request $request)
     {
         try {
@@ -63,7 +63,7 @@ class AuthController extends Controller
                 [
                     'name' => 'required',
                     'email' => 'required|email|unique:users,email',
-                    'password' => 'required'
+                    'password' => 'required|min:6'
                 ]
             );
 
@@ -72,7 +72,7 @@ class AuthController extends Controller
                     'status' => false,
                     'message' => 'validation error',
                     'errors' => $validateUser->errors()
-                ], 401);
+                ], 422);
             }
 
             $user = User::create([
