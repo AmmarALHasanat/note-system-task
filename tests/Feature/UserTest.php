@@ -150,4 +150,22 @@ class UserTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function user_can_logout_successfully()
+    {
+        $user = User::first();
+        $loginResponse = $this->login([
+            'email' => $user->email,
+            'password' => 'password'
+        ]);
+        $token = $loginResponse->json('data.token');
+
+        $logoutResponse = $this->logout($token);
+
+        $logoutResponse->assertStatus(200)->assertJson([
+            'message' => "Logged out"
+        ]);
+    }
+
+
 }
