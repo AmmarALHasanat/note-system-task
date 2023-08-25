@@ -5,6 +5,7 @@ namespace Tests\Traits;
 
 
 
+use App\Models\Note;
 use Illuminate\Testing\TestResponse;
 use Illuminate\Validation\ValidationException;
 
@@ -111,5 +112,27 @@ trait WithApi
     {
         return $this->postApi('/auth/logout');
     }
+
+    public function getNotes():TestResponse
+    {
+        return $this->getApi('/auth/notes');
+    }
+    public function showNote(string $id):TestResponse
+    {
+        return $this->getApi('/auth/notes/'.$id);
+    }
+    public function editNote(string $id, array $attributes = []):TestResponse
+    {
+        return $this->putApi('/auth/notes/'.$id.'/edit', $attributes);
+    }
+    public function deleteNote(string $id):TestResponse
+    {
+        return $this->deleteApi('/auth/notes/'.$id.'/delete');
+    }
+    public function createNote(array $attributes):TestResponse
+    {
+        return $this->postApi('/auth/notes/create',$attributes);
+    }
+
 
 }

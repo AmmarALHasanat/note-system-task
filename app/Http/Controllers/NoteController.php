@@ -26,13 +26,13 @@ class NoteController extends Controller
     public string $viewCreate = 'notes.create';
     public string $viewEdit = 'notes.edit';
     public string $viewShow = 'notes.show';
-    
+
 	public ?string $resourceClass = NoteResource::class;
 
 	public ?string $collectionClass = NoteCollection::class;
- 
+
 	public ?string $policyClass = NotePolicy::class;
- 
+
 	public string $requestClass = NoteRequest::class;
 
 
