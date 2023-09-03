@@ -31,7 +31,7 @@ class NoteTest extends TestCase
 
         $response = $this->getNotes();
 
-        $response->assertStatus(200)->assertJson([
+        $response->assertStatus(206)->assertJson([
             "data" => $notes->toArray()
         ]);
     }
@@ -69,9 +69,8 @@ class NoteTest extends TestCase
             'password' => 'password'
         ]);
         $response = $this->showNote($note->id);
-        $response->assertStatus(400)->assertJson([
-            "message"=> "You don't have permission to view this note",
-            "success"=>false
+        $response->assertStatus(403)->assertJson([
+            "message"=> "This action is unauthorized.",
             ]
         );
     }
@@ -90,8 +89,7 @@ class NoteTest extends TestCase
             'discrption'=>"test",
         ]);
         $response->assertStatus(200)->assertJson([
-            "message"=> "Updated note successfully",
-            "success"=> true
+            "message"=> "Entity was modified Successfully",
         ]);
     }
 
@@ -108,9 +106,9 @@ class NoteTest extends TestCase
             'title'=>"test",
             'discrption'=>"test",
         ]);
-        $response->assertStatus(400)->assertJson([
-            "message"=> "You don't have permission to view this note",
-            "success"=> false
+        $response->assertStatus(403)->assertJson([
+            "message"=> "This action is unauthorized.",
+
         ]);
     }
 
@@ -125,8 +123,7 @@ class NoteTest extends TestCase
 
         $response = $this->deleteNote($note->id);
         $response->assertStatus(200)->assertJson([
-            "message"=> "Deleted note successfully",
-            "success"=> true
+            "message"=> "Entity was deleted Successfully",
         ]);
     }
 
@@ -140,9 +137,8 @@ class NoteTest extends TestCase
         ]);
 
         $response = $this->deleteNote($note->id);
-        $response->assertStatus(400)->assertJson([
-            "message"=> "You don't have permission to view this note",
-            "success"=> false
+        $response->assertStatus(403)->assertJson([
+            "message"=> "This action is unauthorized.",
         ]);
     }
 
@@ -150,8 +146,8 @@ class NoteTest extends TestCase
     /** @test */
     public function user_auth_can_crate_note(): void{
 
-        $note = Note::where('user_id',$this->user->id)->first();
-        $loginResponse = $this->login([
+
+        $this->login([
             'email' => $this->user->email,
             'password' => 'password'
         ]);
@@ -160,9 +156,12 @@ class NoteTest extends TestCase
             'title'=>"test",
             'discrption'=>"test",
         ]);
+        $note = Note::where('user_id', $this->user->id)->latest()->first();
+//        dd($note->id);
+
         $response->assertStatus(201)->assertJson([
-            "message"=> "Cratered note successfully",
-            "success"=> true
+            "message"=> "Entity was created Successfully",
+            "data"=> ["id"=>$note->id,]
         ]);
     }
 }
