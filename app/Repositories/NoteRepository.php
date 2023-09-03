@@ -23,18 +23,7 @@ class NoteRepository extends AbstractRepository
         return Note::class;
     }
 
-    public function getNotesToUser(User $user){
-        try {
-            $notes = $user->notes()->get(); // use Lazy Loading
-            // $notes = User::with('notes')->find($user->id); // use Eager Loading
-        } catch (\Exception $exception) {
-            return response()->json([
-                'message' => $exception->getMessage(),
-                'success' => false
-            ], 400);
-        }
-        return $notes;
-    }
+
     public function show(string $id){
         try {
             $note = Note::findorFail($id);

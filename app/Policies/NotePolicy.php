@@ -10,18 +10,33 @@ class NotePolicy
 {
     use HandlesAuthorization;
 
-    public function view(User $user,Note $note)
+    public function view(User $user, Note $note)
     {
+        // Determine if the user is allowed to view the note
         return $user->id === $note->user_id;
     }
 
-    public function update(User $user, Note $note)
+    public function show(User $user)
     {
+        $currentUrl = explode('/', request()->url());
+        $note_id = end($currentUrl);
+        $note=Note::findOrFail($note_id);
         return $user->id === $note->user_id;
     }
 
-    public function delete(User $user, Note $note)
+    public function update(User $user)
     {
+        $currentUrl = explode('/', request()->url());
+        $note_id = (array_slice($currentUrl, -2)[0]);
+        $note = Note::findOrFail($note_id);
+        return $user->id === $note->user_id;
+    }
+
+    public function destroy(User $user)
+    {
+        $currentUrl = explode('/', request()->url());
+        $note_id = (array_slice($currentUrl, -2)[0]);
+        $note = Note::findOrFail($note_id);
         return $user->id === $note->user_id;
     }
 
