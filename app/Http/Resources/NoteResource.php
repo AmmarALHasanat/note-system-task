@@ -22,6 +22,13 @@ class NoteResource extends JsonResource
      */
     public function toArray($request): array|Arrayable|JsonSerializable
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->id,
+            'title'=>$this->title,
+            'discrption'=>$this->discrption,
+            'user_id'=>$this->user_id,
+            'created_at'=>$this->created_at,
+            'updated_at'=> $this->updated_at,
+        ];
     }
 }

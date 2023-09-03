@@ -31,7 +31,7 @@ class NoteTest extends TestCase
 
         $response = $this->getNotes();
 
-        $response->assertStatus(206)->assertJson([
+        $response->assertStatus(200)->assertJson([
             "data" => $notes->toArray()
         ]);
     }

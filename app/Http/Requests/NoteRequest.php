@@ -15,10 +15,24 @@ class NoteRequest extends Request
      * @var array
      */
     protected array $rules = [
-        'title' => ['string'],
-        'discrption' => ['string']
     ];
 
     // Write your methods using {Controller Method Name}Rules, or {HTTP Method}MethodRules syntax.
     // For example, when index method in the controller is called a method called indexRules will be triggered here if it is exists.
+    protected function storeRules(){
+        return [
+            'title' => ['required', 'string', 'min:3'],
+            'discrption' => ['required', 'string', 'min:3']
+        ];
+    }
+
+    protected function updateRules(){
+        return [
+            'title' => ['required', 'string', 'min:3'],
+            'discrption' => ['required', 'string', 'min:3']
+        ];
+    }
 }
+
+
+

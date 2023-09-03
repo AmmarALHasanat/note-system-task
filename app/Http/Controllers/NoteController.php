@@ -45,14 +45,15 @@ class NoteController extends Controller
         $notes = $this->repository->scope(fn ($builder) => $builder->where('user_id',$user->id) )->paginate();
         return $this->responseDispatcher->index($notes);
     }
+
     // public function show(int|string $entityId): View|JsonResponse
     // {
     //     $user=Auth::user();
-    //     // return parent::show($entityId);
     //     $note = $this->repository->show($entityId);
     //     $this->authorize('view', $note);
     //     return $this->responseDispatcher->show($note);
     // }
+
     public function store(): JsonResponse|RedirectResponse
     {
         $user = Auth::user();
